@@ -1,38 +1,31 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import * as signalR from '@microsoft/signalr';
+import {startSignalRConnection, stopSignalRConnection, connection} from './signalR';
 import {ITask} from "../types/todoTypes";
-
-export type Channel = 'redux' | 'general';
 
 export const todoAPI = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'https://ponatosik-001-site1.dtempurl.com'}),
     endpoints: (build) => ({
-        getMessages: build.query<ITask[], Channel>({
+        getTodoList: build.query<ITask[], void>({
             query: () => `/todolist`,
-            async onCacheEntryAdded(
-                arg,
-                {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
-            ) {
-                const connection = new signalR.HubConnectionBuilder()
-                    .withUrl('https://ponatosik-001-site1.dtempurl.com/testHub')
-                    .build();
-                try {
-                    await cacheDataLoaded;
-                    connection.on('TaskAdded', (data: ITask) => {
-                        updateCachedData((draft) => {
-                            draft.push(data);
-                        });
+            async onCacheEntryAdded(arg, api) {
+                await startSignalRConnection();
+                connection.on('TaskAdded', (data: ITask) => {
+                    api.updateCachedData((draft) => {
+                        draft.push(data);
                     });
-                    await connection.start();
-                } catch {
-                    // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,
-                    // in which case `cacheDataLoaded` will throw
-                }
-                await cacheEntryRemoved;
-                await connection.stop();
+                });
+                connection.on('TaskUpdatedCompleted', (id: number, isChecked:  boolean) => {
+                    api.updateCachedData((draft) => {
+                        const taskIndex = draft.findIndex((task) => task.id === id);
+                        draft[taskIndex].completed = isChecked
+                    });
+
+                });
+                await api.cacheEntryRemoved;
+                await stopSignalRConnection();
             },
         }),
     }),
 });
 
-export const {useGetMessagesQuery} = todoAPI;
+export const {useGetTodoListQuery} = todoAPI;
