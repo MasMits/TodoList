@@ -21,6 +21,13 @@ export const todoAPI = createApi({
                     });
 
                 });
+                connection.on('TaskDeleted', (id: number) => {
+                    console.log('TaskDeleted TEST')
+                    api.updateCachedData((draft) => {
+                        const taskIndex = draft.findIndex((task) => task.id === id);
+                        draft.splice(taskIndex, 1)
+                    });
+                });
                 await api.cacheEntryRemoved;
                 await stopSignalRConnection();
             },

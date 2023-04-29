@@ -31,6 +31,11 @@ export const sendTaskCheckRequest = async (taskId: number, isChecked: boolean) =
     }
 };
 
-
-
-// export other functions for sending different types of requests to the server
+export const sendDeleteTaskRequest = async (taskId: number) => {
+    try {
+        await connection.invoke('DeleteTask', taskId);
+        console.log(`SignalR DeleteTask request sent for task ${taskId}.`);
+    } catch (err) {
+        console.error(`SignalR DeleteTask request failed for task ${taskId}: `, err);
+    }
+};
