@@ -2,4 +2,47 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    padding: 4px 0;
+    flex-grow: 1;
+}
+
+.todo-item:hover {
+    background: #F5F5F5;
+    border-radius: 8px;
+}
+
+.control{
+    visibility: hidden;
+    color: #808080;
+}
+
+.todo-item-control:hover .control{
+    visibility: visible
+}
+.todo-item:hover .control{
+    visibility: hidden
+}
+
+.todo-item-control{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 18px;
+}
+
+.todo-item-info{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+    color: #808080;
+}
+
+.strike{
+    text-decoration: line-through;
+    color: #808080
+}
+.normal{
+    text-decoration: none;
+    color: #000000
 }

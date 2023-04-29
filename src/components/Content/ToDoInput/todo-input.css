@@ -1,0 +1,37 @@
+.todo-input{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px 32px;
+    position: relative;
+    background: #FFFFFF;
+    border: 2px solid #666666;
+    border-radius: 8px;
+
+}
+.input{
+    width: 100%;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 0;
+    gap: 12px;
+}
+
+.action-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 8px;
+    width: 100%;
+}
+
+.add-new{
+    width: 80px;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
-import {Backdrop, CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
+import './loading.css';
 
 export const Loading = () => {
     return (
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+        <div className='loading'>
             <CircularProgress color="inherit" />
-        </Backdrop>
+        </div>
     );
 };
 
