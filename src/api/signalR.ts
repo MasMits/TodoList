@@ -39,3 +39,13 @@ export const sendDeleteTaskRequest = async (taskId: number) => {
         console.error(`SignalR DeleteTask request failed for task ${taskId}: `, err);
     }
 };
+
+export const sendAddTaskRequest = async (title: string, deadline = '') => {
+    try {
+        console.log('Test')
+        await connection.invoke('AddTask', title, null);
+        console.log(`SignalR AddTask request sent for task ${title}.`);
+    } catch (err) {
+        console.error(`SignalR AddTask request failed for task ${title}: `, err);
+    }
+};

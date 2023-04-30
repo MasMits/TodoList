@@ -2,7 +2,8 @@ export interface ITask {
     id: number,
     title: string,
     completed: boolean,
-    deadline: string
+    deadline: string,
+    order: number
 }
 
 
