@@ -3,11 +3,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 8px;
     align-items: flex-start;
-    padding: 16px 32px;
+    padding: 16px 16px;
     position: relative;
     background: #FFFFFF;
-    border: 2px solid #666666;
+    border: 2px solid #808080;
     border-radius: 8px;
 
 }
@@ -27,11 +28,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     gap: 8px;
-    width: 100%;
 }
 
 .add-new{
     width: 80px;
+}
+
+.input-buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
 }

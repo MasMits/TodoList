@@ -13,7 +13,7 @@ import './todo-item.css';
 
 export const ToDoItem = ({task}: ITaskProps) => {
     const titleClass = task.completed ? 'strike' : 'normal'
-    let date = new Date(2023, 5); // test data
+    let date = new Date(task.deadline);
     const checkboxHandler = () => {
         sendTaskCheckRequest(task.id, !task.completed);
     }
@@ -35,7 +35,7 @@ export const ToDoItem = ({task}: ITaskProps) => {
                         <div className='todo-item-info'>
                             <DateRangeIcon/>
                             <Typography noWrap variant="body2">
-                                {date.getFullYear() + ' ' + date.toLocaleString('default', { month: 'long' })}
+                                {date.getFullYear() + ' ' + date.toLocaleString('default', { month: 'long' })  + ' ' + date.getDay()}
                             </Typography>
                             <AccountCircleIcon/>
                             <Typography noWrap variant="body2">
