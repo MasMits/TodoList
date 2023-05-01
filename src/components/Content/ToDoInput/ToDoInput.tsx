@@ -3,18 +3,17 @@ import {DatePicker} from "../DatePicker";
 import {Button, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {sendAddTaskRequest} from "../../../api/signalR";
 import './todo-input.css';
 import {useDispatch, useSelector} from "react-redux";
-import {closeAddTaskForm, openAddTaskForm, setTitle} from "../../../store/reducers/todo-input.slice";
+import {closeAddTaskForm, openAddTaskForm, setTitle, openAddDateForm} from "../../../store/reducers/todo-input.slice";
 import {RootState} from "../../../store";
 
 export const ToDoInput = () => {
     const dispatch = useDispatch();
-    const { isAddTask, title } = useSelector((state: RootState) => state.todoInput);
+    const { isAddTask, title, date, isAddDate } = useSelector((state: RootState) => state.todoInput);
     const addButtonHandler = () => {
-        sendAddTaskRequest(title, '').then(() => dispatch(closeAddTaskForm()));
+        sendAddTaskRequest(title, date).then(() => dispatch(closeAddTaskForm()));
     };
 
     if(!isAddTask) return <Button variant="text" startIcon={<AddIcon/>}
@@ -27,8 +26,7 @@ export const ToDoInput = () => {
                 <TextField label='Write your task' variant="standard" className={'input'} onChange={(e) => dispatch(setTitle(e.target.value))}/>
                 <div className='input-buttons'>
                 <div className='info'>
-                    <Button variant="outlined" startIcon={<AccountCircleIcon/>}> No date</Button>
-                    <Button variant="outlined" startIcon={<DateRangeIcon/>}> No Assignment</Button>
+                    <Button variant="outlined" onClick={() => dispatch(openAddDateForm())} startIcon={<DateRangeIcon/>}> {date.slice(0,10) || 'No date'}</Button>
                 </div>
                 <div className='action-button'>
                     <Button variant="contained" onClick={() => dispatch(closeAddTaskForm())}>Cancel</Button>
@@ -36,7 +34,7 @@ export const ToDoInput = () => {
                 </div>
                 </div>
             </div>
-            <DatePicker/>
+            {isAddDate && <DatePicker/>}
         </div>
     );
 };

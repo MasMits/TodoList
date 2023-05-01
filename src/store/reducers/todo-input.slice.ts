@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isAddTask: false,
+    isAddDate: false,
+    date: '2023-05-02',
     title: '',
 };
 
@@ -19,8 +21,14 @@ const todoInputSlice = createSlice({
         setTitle: (state, action) => {
             state.title = action.payload;
         },
+        openAddDateForm: (state) => {
+            state.isAddDate = !state.isAddDate;
+        },
+        setDate: (state, action) => {
+            state.date = action.payload;
+        },
     },
 });
 
-export const { openAddTaskForm, closeAddTaskForm, setTitle } = todoInputSlice.actions;
+export const { openAddTaskForm, closeAddTaskForm, setTitle, openAddDateForm, setDate} = todoInputSlice.actions;
 export default todoInputSlice.reducer;

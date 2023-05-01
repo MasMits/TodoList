@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import {Divider} from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Checkbox from '@mui/material/Checkbox';
@@ -35,11 +34,7 @@ export const ToDoItem = ({task}: ITaskProps) => {
                         <div className='todo-item-info'>
                             <DateRangeIcon/>
                             <Typography noWrap variant="body2">
-                                {date.getFullYear() + ' ' + date.toLocaleString('default', { month: 'long' })  + ' ' + date.getDay()}
-                            </Typography>
-                            <AccountCircleIcon/>
-                            <Typography noWrap variant="body2">
-                                Jon Snow
+                                {date.getFullYear() + ' ' + date.toLocaleString('default', { month: 'long' })  + ' ' + (date.getDate())}
                             </Typography>
                         </div>
                     </div>
