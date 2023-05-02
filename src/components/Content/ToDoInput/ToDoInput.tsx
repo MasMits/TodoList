@@ -12,6 +12,8 @@ import {RootState} from "../../../store";
 export const ToDoInput = () => {
     const dispatch = useDispatch();
     const { isAddTask, title, date, isAddDate } = useSelector((state: RootState) => state.todoInput);
+    let jsDate = new Date(date);
+
     const addButtonHandler = () => {
         sendAddTaskRequest(title, date).then(() => dispatch(closeAddTaskForm()));
     };
@@ -26,10 +28,10 @@ export const ToDoInput = () => {
                 <TextField label='Write your task' variant="standard" className={'input'} onChange={(e) => dispatch(setTitle(e.target.value))}/>
                 <div className='input-buttons'>
                 <div className='info'>
-                    <Button variant="outlined" onClick={() => dispatch(openAddDateForm())} startIcon={<DateRangeIcon/>}> {date.slice(0,10) || 'No date'}</Button>
+                    <Button variant="outlined" onClick={() => dispatch(openAddDateForm())} startIcon={<DateRangeIcon/>}> {(jsDate.getFullYear() + ' ' + jsDate.toLocaleString('default', { month: 'long' })  + ' ' + (jsDate.getDate())) || 'No date'}</Button>
                 </div>
                 <div className='action-button'>
-                    <Button variant="contained" onClick={() => dispatch(closeAddTaskForm())}>Cancel</Button>
+                    <Button variant="contained" onClick={() => dispatch(closeAddTaskForm())} color='inherit'>Cancel</Button>
                     <Button variant="contained" onClick={addButtonHandler}>Add Task</Button>
                 </div>
                 </div>
