@@ -1,11 +1,15 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {todoAPI} from "../api/todosAPI";
+import { configureStore } from "@reduxjs/toolkit";
 import todoInputReducer from './reducers/todo-input.slice';
+import {todoListSlice} from "./reducers/todo-item.slice";
+import thunk from 'redux-thunk'
 
 export const store = configureStore({
-    enhancers: undefined, middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(todoAPI.middleware), preloadedState: undefined,
-    reducer: {[todoAPI.reducerPath]: todoAPI.reducer, todoInput: todoInputReducer}
+    reducer: {
+        todoInput: todoInputReducer,
+        todoList: todoListSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
