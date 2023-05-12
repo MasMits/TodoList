@@ -1,6 +1,7 @@
  import * as signalR from '@microsoft/signalr';
  import {ITask} from "../types/todoTypes";
  import {taskAdded, taskDeleted, taskMoved, taskUpdatedCompleted} from "../store/reducers/todo-item.slice";
+ import {HubConnectionState} from "@microsoft/signalr";
 
 export const connection = new signalR.HubConnectionBuilder()
     .withUrl('https://ponatosik-001-site1.dtempurl.com/testHub')
@@ -61,7 +62,9 @@ export const sendAddTaskRequest = async (title: string, deadline = '') => {
  };
 
  export const connectToSignalR = async (dispatch: any) => {
-     await startSignalRConnection();
+     if (connection.state === HubConnectionState.Disconnected) {
+         await startSignalRConnection();
+     }
 
      connection.on('TaskAdded', (data: ITask) => {
          dispatch(taskAdded(data));

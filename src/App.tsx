@@ -9,10 +9,10 @@ import {connectToSignalR} from "./api/signalR";
 
 function App() {
     const dispatch = useDispatch();
-    connectToSignalR(dispatch);
     const {tasks, error, loading} = useSelector((state: RootState) => state.todoList);
 
     useEffect(() => {
+        connectToSignalR(dispatch);
         dispatch(fetchTodos());
     }, [])
 
