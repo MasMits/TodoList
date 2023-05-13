@@ -46,3 +46,7 @@
     text-decoration: none;
     color: #000000
 }
+
+.todo-item-divider{
+    padding-top: 16px;
+}

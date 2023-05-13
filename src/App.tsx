@@ -21,7 +21,7 @@ function App() {
 
     return (
         <div className="App">
-            <Content data={tasks}/>
+            <Content todos={tasks}/>
         </div>
     );
 }
