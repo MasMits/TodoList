@@ -47,11 +47,7 @@ export const todoListSlice = createSlice({
             }
         },
         taskMoved: (state, action) => {
-            console.log(action.payload)
             const { id, destinationIndex } = action.payload;
-            console.log(id)
-            console.log(destinationIndex)
-
             const draggedTask = state.tasks.find((task) => task.id === id);
             if (!draggedTask) return;
             const draggedTaskOrder = draggedTask.order;
@@ -70,8 +66,6 @@ export const todoListSlice = createSlice({
                 }
             });
             state.tasks.sort((a, b) => a.order - b.order);
-            console.log('Final')
-
         },
     },
 });

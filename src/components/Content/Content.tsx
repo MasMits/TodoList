@@ -16,7 +16,7 @@ interface IContentProps {
 
 export const Content = ({ todos }: IContentProps) => {
     const dispatch = useDispatch();
-
+    console.log(todos)
     const handleOnDragEnd = useCallback(
         async (result: DropResult) => {
             if (!result.destination) return;
@@ -33,7 +33,7 @@ export const Content = ({ todos }: IContentProps) => {
     return (
         <div className="content">
             <Slide direction="down" in timeout={1000}>
-                <Typography variant="h4">Inbox</Typography>
+                <Typography variant="h4" className="title">Inbox</Typography>
             </Slide>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Droppable droppableId="todos">
@@ -47,7 +47,9 @@ export const Content = ({ todos }: IContentProps) => {
                     )}
                 </Droppable>
             </DragDropContext>
-            <ToDoInput />
+            <div className='todo-input-container'>
+                <ToDoInput />
+            </div>
         </div>
     );
 };

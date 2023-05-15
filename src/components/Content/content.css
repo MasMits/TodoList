@@ -6,3 +6,11 @@
     width: 100%;
     max-width: 1000px;
 }
+
+.title {
+    padding-left: 70px;
+}
+
+.todo-input-container{
+    padding-left: 64px;
+}
