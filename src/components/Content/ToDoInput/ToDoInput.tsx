@@ -27,17 +27,16 @@ export const ToDoInput = () => {
             <div className='todo-input'>
                 <TextField label='Write your task' variant="standard" className={'input'} onChange={(e) => dispatch(setTitle(e.target.value))}/>
                 <div className='input-buttons'>
-                <div className='info'>
-                    <Button variant="outlined" onClick={() => dispatch(openAddDateForm())} startIcon={<DateRangeIcon/>}> {(jsDate.getFullYear() + ' ' + jsDate.toLocaleString('default', { month: 'long' })  + ' ' + (jsDate.getDate())) || 'No date'}</Button>
-                </div>
-                <div className='action-button'>
-                    <Button variant="contained" onClick={() => dispatch(closeAddTaskForm())} color='inherit'>Cancel</Button>
-                    <Button variant="contained" onClick={addButtonHandler}>Add Task</Button>
-                </div>
+                    <div className='info'>
+                        <Button variant="outlined" onClick={() => dispatch(openAddDateForm())} startIcon={<DateRangeIcon/>}> {(jsDate.getFullYear() + ' ' + jsDate.toLocaleString('default', { month: 'long' })  + ' ' + (jsDate.getDate())) || 'No date'}</Button>
+                    </div>
+                    <div className='action-button'>
+                        <Button variant="contained" onClick={() => dispatch(closeAddTaskForm())} color='inherit'>Cancel</Button>
+                        <Button variant="contained" onClick={addButtonHandler}>Add Task</Button>
+                    </div>
                 </div>
             </div>
             {isAddDate && <DatePicker/>}
         </div>
     );
 };
-

@@ -73,7 +73,7 @@ export const fetchTodos = () => {
     return async (dispatch: any) => {
         dispatch(fetchTasks(true));
         try {
-            const response = await fetch('https://ponatosik-001-site1.dtempurl.com/todolist');
+            const response = await fetch('https://ponatosik-001-site1.dtempurl.com/todolist/1');
             const data = await response.json();
             dispatch(fetchTasksSuccess(data));
         } catch (error) {

@@ -4,7 +4,7 @@
  import {HubConnectionState} from "@microsoft/signalr";
 
 export const connection = new signalR.HubConnectionBuilder()
-    .withUrl('https://ponatosik-001-site1.dtempurl.com/testHub')
+    .withUrl('https://ponatosik-001-site1.dtempurl.com/board?workspaceid=1')
     .build();
 
 export const startSignalRConnection = async () => {
@@ -54,7 +54,7 @@ export const sendAddTaskRequest = async (title: string, deadline = '') => {
 
  export const sendMoveTaskRequest = async (id: number, shiftIndex: number) => {
      try {
-         await connection.invoke('MoveTask', id, shiftIndex);
+         await connection.invoke('UpdateTaskOrder', id, shiftIndex);
          console.log(`SignalR MoveTask request sent for task with id ${id} to destinationIndex  ${shiftIndex}.`);
      } catch (err) {
          console.error(`SignalR MoveTask request failed for task  with sourceIndex ${id} to destinationIndex  ${shiftIndex}: `, err);
@@ -66,16 +66,16 @@ export const sendAddTaskRequest = async (title: string, deadline = '') => {
          await startSignalRConnection();
      }
 
-     connection.on('TaskAdded', (data: ITask) => {
+     connection.on('AddTask', (data: ITask) => {
          dispatch(taskAdded(data));
      });
-     connection.on('TaskUpdatedCompleted', (id: number, isChecked: boolean) => {
+     connection.on('UpdateTaskCompleted', (id: number, isChecked: boolean) => {
          dispatch(taskUpdatedCompleted({ id, isChecked }));
      });
-     connection.on('TaskDeleted', (id: number) => {
+     connection.on('DeleteTask', (id: number) => {
          dispatch(taskDeleted(id));
      });
-     connection.on('TaskMoved', (id: number, destinationIndex: number) => {
+     connection.on('UpdateTaskOrder', (id: number, destinationIndex: number) => {
          dispatch(taskMoved({ id, destinationIndex }));
      });
 
