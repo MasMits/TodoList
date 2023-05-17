@@ -5,6 +5,7 @@ const initialState = {
     isAddDate: false,
     date: '2023-05-02',
     title: '',
+    error: false
 };
 
 const todoInputSlice = createSlice({
@@ -27,8 +28,11 @@ const todoInputSlice = createSlice({
         setDate: (state, action) => {
             state.date = action.payload;
         },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
     },
 });
 
-export const { openAddTaskForm, closeAddTaskForm, setTitle, openAddDateForm, setDate} = todoInputSlice.actions;
+export const { openAddTaskForm, closeAddTaskForm, setTitle, openAddDateForm, setDate, setError} = todoInputSlice.actions;
 export default todoInputSlice.reducer;

@@ -10,8 +10,8 @@ import {sendDeleteTaskRequest, sendTaskCheckRequest} from '../../../api/signalR'
 import {useDispatch} from 'react-redux';
 import {taskUpdatedCompleted} from '../../../store/reducers/todo-item.slice';
 import {ITask, ITaskProps} from '../../../types/todoTypes';
-import './todo-item.css';
 import {Draggable} from "react-beautiful-dnd";
+import './todo-item.css';
 
  const ToDoItem: React.FC<ITaskProps> = ({task}) => {
     const {id, completed, deadline, title} = task;
@@ -41,7 +41,7 @@ import {Draggable} from "react-beautiful-dnd";
                     <Checkbox checked={completed} onChange={checkboxHandler}/>
                     <div>
                         <Typography noWrap variant="body1" className={titleClass}>
-                            {title + id}
+                            {title}
                         </Typography>
                         <div className="todo-item-info">
                             <DateRangeIcon/>
