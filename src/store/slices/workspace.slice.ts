@@ -3,7 +3,6 @@ import {IWorkspace} from "../../types/IWorkspace";
 import workspace from "../../components/SideBar/Workspace/Workspace";
 import {connectToSignalR} from "../../api/signalR";
 
-
 interface WorkspaceState {
     workspaces: IWorkspace[];
     isLoading: boolean;
@@ -37,7 +36,6 @@ export const workspaceSlice = createSlice({
             state.error = action.payload;
         },
         addWorkspace(state, action: PayloadAction<IWorkspace>) {
-            // const id = state.workspaces.length + 1;
             state.workspaces.push(action.payload);
         },
         updateWorkspaceName(state, action: PayloadAction<{ id: number; name: string }>) {
@@ -49,6 +47,7 @@ export const workspaceSlice = createSlice({
         },
         deleteWorkspace(state, action: PayloadAction<number>) {
             state.workspaces = state.workspaces.filter((w) => w.id !== action.payload);
+            state.activeWorkspace = state.workspaces[0].id;
         },
         setActiveWorkspace(state, action: PayloadAction<number>) {
             state.activeWorkspace = action.payload;

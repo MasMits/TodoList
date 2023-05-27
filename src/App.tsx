@@ -20,8 +20,6 @@ function App() {
             await dispatch(fetchAllWorkspaces());
             await dispatch(fetchTodos(activeWorkspace));
             await connectToWorkspaceSignalR(dispatch);
-            console.log('State 0:');
-
         } catch (error) {
             console.error('Error fetching workspaces:', error);
         }
@@ -29,7 +27,6 @@ function App() {
 
     useEffect(() => {
         fetchWorkspaces();
-
     }, [])
 
     useEffect(() => {
