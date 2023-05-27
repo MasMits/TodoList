@@ -1,0 +1,23 @@
+#root {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.app-with-drawer {
+    margin-top: 65px;
+    display: flex;
+    justify-content: left;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}

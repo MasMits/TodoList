@@ -1,13 +1,15 @@
 import React, {useCallback} from 'react';
+import {RootState} from "../../store";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {Slide} from '@mui/material';
 import {AnimatedToDoItem} from "./ToDoItem";
 import {ToDoInput} from "./ToDoInput";
-import {ITask} from "../../types/todoTypes";
 import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd';
 import {sendMoveTaskRequest} from "../../api/signalR";
-import {taskMoved} from "../../store/reducers/todo-item.slice";
-import {useDispatch} from "react-redux";
+import {taskMoved} from "../../store/slices/todo-list.slice";
+import {useDispatch, useSelector} from "react-redux";
+import {ITask} from "../../types/todoTypes";
 import './content.css';
 
 interface IContentProps {
@@ -15,6 +17,9 @@ interface IContentProps {
 }
 
 export const Content = ({ todos }: IContentProps) => {
+
+    const {isDrawerOpen} = useSelector((state: RootState) => state.workspaces);
+
     const dispatch = useDispatch();
     console.log(todos)
     const handleOnDragEnd = useCallback(
@@ -31,7 +36,13 @@ export const Content = ({ todos }: IContentProps) => {
     );
 
     return (
-        <div className="content">
+        <Box className="content"
+             sx={{
+            transition: 'margin-left 0.2s',
+            marginLeft: isDrawerOpen ? 0 : '-200px',
+        }}
+        >
+
             <Slide direction="down" in timeout={1000}>
                 <Typography variant="h4" className="title">Inbox</Typography>
             </Slide>
@@ -50,7 +61,7 @@ export const Content = ({ todos }: IContentProps) => {
             <div className='todo-input-container'>
                 <ToDoInput />
             </div>
-        </div>
+        </Box>
     );
 };
 

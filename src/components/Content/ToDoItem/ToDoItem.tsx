@@ -1,14 +1,13 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import {Divider, Slide} from '@mui/material';
+import {Divider, IconButton, Slide} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import Button from '@mui/material/Button';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Checkbox from '@mui/material/Checkbox';
 import {sendDeleteTaskRequest, sendTaskCheckRequest} from '../../../api/signalR';
 import {useDispatch} from 'react-redux';
-import {taskUpdatedCompleted} from '../../../store/reducers/todo-item.slice';
+import {taskUpdatedCompleted} from '../../../store/slices/todo-list.slice';
 import {ITask, ITaskProps} from '../../../types/todoTypes';
 import {Draggable} from "react-beautiful-dnd";
 import './todo-item.css';
@@ -51,9 +50,9 @@ import './todo-item.css';
                         </div>
                     </div>
                 </div>
-                <Button className="control" onClick={deleteHandler}>
+                <IconButton className="control" onClick={deleteHandler}>
                     <ClearIcon/>
-                </Button>
+                </IconButton>
             </div>
             <Divider/>
         </div>

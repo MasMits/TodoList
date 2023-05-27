@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
     isAddTask: false,
@@ -34,5 +34,5 @@ const todoInputSlice = createSlice({
     },
 });
 
-export const { openAddTaskForm, closeAddTaskForm, setTitle, openAddDateForm, setDate, setError} = todoInputSlice.actions;
+export const {openAddTaskForm, closeAddTaskForm, setTitle, openAddDateForm, setDate, setError} = todoInputSlice.actions;
 export default todoInputSlice.reducer;

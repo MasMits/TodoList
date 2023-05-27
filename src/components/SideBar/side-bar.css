@@ -1,0 +1,36 @@
+.drawer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    gap: 8px;
+    height: 100%;
+    width: 300px;
+    background: #FAFAFA;
+}
+
+.open {
+    transition: transform 0.2s;
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+.close {
+    transition: transform 0.2s, opacity 0.4s, display 2.6s;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.workspace-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 8px 8px 16px;
+    color: #494949;
+}
+
+.add-workspace-btn {
+    width: 32px;
+    height: 32px;
+}

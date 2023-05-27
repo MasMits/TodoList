@@ -12,7 +12,7 @@ import {
     setTitle,
     openAddDateForm,
     setError
-} from "../../../store/reducers/todo-input.slice";
+} from "../../../store/slices/todo-input.slice";
 import {RootState} from "../../../store";
 
 export const ToDoInput = () => {

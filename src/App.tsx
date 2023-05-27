@@ -1,28 +1,52 @@
 import React, {useEffect} from 'react';
 import {Content} from "./components/Content";
 import {Loading} from "./components/Loading";
-import './app.css';
+import './components/Layout/app.css';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./store";
-import {fetchTodos} from "./store/reducers/todo-item.slice";
-import {connectToSignalR} from "./api/signalR";
+import {fetchTodos} from "./store/slices/todo-list.slice";
+import {sendConnectToWorkspaceRequest} from "./api/signalR";
+import {Layout} from "./components/Layout";
+import {fetchAllWorkspaces} from "./store/slices/workspace.slice";
+import {connectToWorkspaceSignalR} from "./api/workspaceAPI";
 
 function App() {
     const dispatch = useDispatch();
     const {tasks, error, loading} = useSelector((state: RootState) => state.todoList);
+    const {activeWorkspace} = useSelector((state: RootState) => state.workspaces);
+
+    const fetchWorkspaces = async () => {
+        try {
+            await dispatch(fetchAllWorkspaces());
+            await dispatch(fetchTodos(activeWorkspace));
+            await connectToWorkspaceSignalR(dispatch);
+            console.log('State 0:');
+
+        } catch (error) {
+            console.error('Error fetching workspaces:', error);
+        }
+    };
 
     useEffect(() => {
-        connectToSignalR(dispatch);
-        dispatch(fetchTodos());
+        fetchWorkspaces();
+
     }, [])
 
-    if (loading) return <Loading/>;
-    if (error) return <div>error</div>;
+    useEffect(() => {
+        dispatch(fetchTodos(activeWorkspace));
+        sendConnectToWorkspaceRequest(activeWorkspace);
+    }, [activeWorkspace])
+
+    if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className="App">
-            <Content todos={tasks}/>
-        </div>
+        <Layout>
+            {loading
+                ?
+                <Loading/> :
+                <Content todos={tasks}/>
+            }
+        </Layout>
     );
 }
 

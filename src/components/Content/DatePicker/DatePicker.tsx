@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import './datepicker.css';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store";
-import {setDate} from "../../../store/reducers/todo-input.slice";
+import {setDate} from "../../../store/slices/todo-input.slice";
 
 export const DatePicker = () => {
     const dispatch = useDispatch();
