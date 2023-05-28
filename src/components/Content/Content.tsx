@@ -1,6 +1,4 @@
 import React, {useCallback} from 'react';
-import {RootState} from "../../store";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {Slide} from '@mui/material';
 import {AnimatedToDoItem} from "./ToDoItem";
@@ -8,7 +6,7 @@ import {ToDoInput} from "./ToDoInput";
 import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd';
 import {sendMoveTaskRequest} from "../../api/signalR";
 import {taskMoved} from "../../store/slices/todo-list.slice";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {ITask} from "../../types/todoTypes";
 import './content.css';
 
@@ -17,8 +15,6 @@ interface IContentProps {
 }
 
 export const Content = ({ todos }: IContentProps) => {
-
-    const {isDrawerOpen} = useSelector((state: RootState) => state.workspaces);
 
     const dispatch = useDispatch();
     console.log(todos)
@@ -36,13 +32,7 @@ export const Content = ({ todos }: IContentProps) => {
     );
 
     return (
-        <Box className="content"
-             sx={{
-            transition: 'margin-left 0.2s',
-            marginLeft: isDrawerOpen ? 0 : '-200px',
-        }}
-        >
-
+        <div className={"content"}>
             <Slide direction="down" in timeout={1000}>
                 <Typography variant="h4" className="title">Inbox</Typography>
             </Slide>
@@ -61,7 +51,7 @@ export const Content = ({ todos }: IContentProps) => {
             <div className='todo-input-container'>
                 <ToDoInput />
             </div>
-        </Box>
+        </div>
     );
 };
 

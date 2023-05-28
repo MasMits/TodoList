@@ -1,4 +1,4 @@
-.drawer {
+.sidebar {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -8,18 +8,23 @@
     height: 100%;
     width: 300px;
     background: #FAFAFA;
+    z-index: 1000;
 }
 
 .open {
-    transition: transform 0.2s;
+    transition: transform 0.2s, opacity 0.4s, width 0.4s;
     transform: translateX(0%);
     opacity: 1;
+    /*display: block;*/
+
 }
 
 .close {
-    transition: transform 0.2s, opacity 0.4s, display 2.6s;
+    transition: transform 0.2s, opacity 0.4s, width 0.4s;
     transform: translateX(-100%);
     opacity: 0;
+    width: 0;
+    /*display: none;*/
 }
 
 .workspace-title {
@@ -33,4 +38,22 @@
 .add-workspace-btn {
     width: 32px;
     height: 32px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100vw;
+        position: absolute;
+        height: 100vh;
+        margin-bottom: 20px;
+    }
+
+    .open{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    .workspace-title {
+        padding: 16px 8px;
+    }
 }

@@ -4,11 +4,13 @@
     right: 0;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
 .App {
     display: flex;
     justify-content: center;
+    overflow: hidden;
     width: 100vw;
     height: 100vh;
 }
@@ -16,8 +18,21 @@
 .app-with-drawer {
     margin-top: 65px;
     display: flex;
-    justify-content: left;
-    overflow: hidden;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+    .app-with-drawer {
+        margin-top: 0;
+    }
+    .app-with-drawer {
+        margin-top: 65px;
+        display: block;
+        justify-content: center;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+    }
 }

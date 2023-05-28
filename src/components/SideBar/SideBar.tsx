@@ -16,7 +16,7 @@ export function SideBar() {
 
     const isOpenStyle = isDrawerOpen ? 'open' : 'close';
     return (
-        <List className={'drawer ' + isOpenStyle}>
+        <List className={'sidebar ' + isOpenStyle}>
             <div className='workspace-title'>
                 <Typography key='workspace' variant="body1"> <b>WorkSpace:</b></Typography>
                 <IconButton onClick={() => dispatch(openAddWorkspaceForm())}
