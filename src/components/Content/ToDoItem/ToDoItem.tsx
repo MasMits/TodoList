@@ -39,7 +39,7 @@ import './todo-item.css';
                 <div className="todo-item">
                     <Checkbox checked={completed} onChange={checkboxHandler}/>
                     <div>
-                        <Typography noWrap variant="body1" className={titleClass}>
+                        <Typography variant="body1" className={titleClass}>
                             {title}
                         </Typography>
                         <div className="todo-item-info">
