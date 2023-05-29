@@ -16,7 +16,7 @@
 }
 
 .app-with-drawer {
-    overflow-x: hidden;
+    overflow: hidden;
     margin-top: 65px;
     display: flex;
     justify-content: center;
