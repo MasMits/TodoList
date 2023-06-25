@@ -7,7 +7,7 @@
 
  export const startSignalRConnection = async (activeWorkspace: number) => {
      connection = new signalR.HubConnectionBuilder()
-         .withUrl(`https://ponatosik-001-site1.dtempurl.com/board?workspaceid=${activeWorkspace}`)
+         .withUrl(`https://realtimetodowebapi.azurewebsites.net/board?workspaceid=${activeWorkspace}`)
          .build();
 
      try {

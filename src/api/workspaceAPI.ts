@@ -4,7 +4,7 @@ import {addWorkspace, deleteWorkspace} from "../store/slices/workspace.slice";
 import {IWorkspace} from "../types/IWorkspace";
 
 export const connection = new signalR.HubConnectionBuilder()
-    .withUrl('https://ponatosik-001-site1.dtempurl.com/workspaceshub')
+    .withUrl('https://realtimetodowebapi.azurewebsites.net/workspaceshub')
     .build();
 
 export const startSignalRConnection = async () => {

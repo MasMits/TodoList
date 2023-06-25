@@ -11,6 +11,8 @@ import './workspace.css';
 import CircleIcon from '@mui/icons-material/Circle';
 import {IconButton} from "@mui/material";
 import {RootState} from "../../../store";
+import {fetchTodos} from "../../../store/slices/todo-list.slice";
+import {sendConnectToWorkspaceRequest} from "../../../api/signalR";
 
 const Workspace = ({workspace}: IWorkspaceProps) => {
     const dispatch = useDispatch();
@@ -19,9 +21,15 @@ const Workspace = ({workspace}: IWorkspaceProps) => {
     const deleteHandler = async () => {
         await sendDeleteWorkspaceRequest(workspace.id);
     };
+
+    const workspaceHandler = () => {
+        dispatch(fetchTodos(activeWorkspace));
+        sendConnectToWorkspaceRequest(activeWorkspace);
+        dispatch(setActiveWorkspace(workspace.id))
+    }
     return (
         <ListItem key={workspace.id} disablePadding className='flex workspace' >
-            <ListItemButton onClick={() => dispatch(setActiveWorkspace(workspace.id))} selected={activeWorkspace === workspace.id} >
+            <ListItemButton onClick={workspaceHandler} selected={activeWorkspace === workspace.id} >
                 <CircleIcon sx={{ fontSize: 10, color: '#737373'}} className='workspace-bullet-point'/>
                 <ListItemText primary={'  ' + workspace.name} />
             </ListItemButton>

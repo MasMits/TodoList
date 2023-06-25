@@ -72,8 +72,10 @@ export const todoListSlice = createSlice({
 export const fetchTodos = (activeWorkspace: number) => {
     return async (dispatch: any) => {
         dispatch(fetchTasks(true));
+        console.log('fetchTodos activeWorkspace: ');
+        console.log(activeWorkspace);
         try {
-            const response = await fetch(`https://ponatosik-001-site1.dtempurl.com/todolist/${activeWorkspace}`);
+            const response = await fetch(`https://realtimetodowebapi.azurewebsites.net/todolist/${activeWorkspace}`);
             const data = await response.json();
             dispatch(fetchTasksSuccess(data));
         } catch (error) {
