@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IWorkspace} from "../../types/IWorkspace";
-// import workspace from "../../components/SideBar/Workspace/Workspace";
 import {connectToSignalR} from "../../api/signalR";
 import {fetchTodos} from "./todo-list.slice";
 
@@ -65,9 +64,9 @@ export const fetchAllWorkspaces = () => {
         try {
             const response = await fetch('https://realtimetodowebapi.azurewebsites.net/Workspaces');
             const data: IWorkspace[] = await response.json();
+            await dispatch(setActiveWorkspace(data[0].id));
             await dispatch(fetchWorkspaceSuccess(data));
             connectToSignalR(dispatch, data[0].id);
-            await dispatch(setActiveWorkspace(data[0].id));
             await dispatch(fetchTodos(data[0].id));
         } catch (error) {
             console.log(fetchWorkspaceError);

@@ -23,8 +23,8 @@ const Workspace = ({workspace}: IWorkspaceProps) => {
     };
 
     const workspaceHandler = () => {
-        dispatch(fetchTodos(activeWorkspace));
-        sendConnectToWorkspaceRequest(activeWorkspace);
+        dispatch(fetchTodos(workspace.id));
+        sendConnectToWorkspaceRequest(workspace.id);
         dispatch(setActiveWorkspace(workspace.id))
     }
     return (
